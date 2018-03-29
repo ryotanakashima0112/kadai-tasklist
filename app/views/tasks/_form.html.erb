@@ -1,24 +1,37 @@
+<div class="row">
+<div class="col-xm-12">
+<div class="col-sm-8 col-sm-offset-2">
+<div class="col-md-8 col-md-offset-2">
+<div class="col-lg-6 col-lg-offset-3">
 <%= form_for(task) do |f| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(task.errors.count, "error") %> prohibited this message from being saved:</h2>
-
+      <div class="alert alert-warning">
       <ul>
         <% task.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
+      </div>
     </div>
   <% end %>
  
-  <%= f.label :content, 'タスク'%>
-  
-  <%= f.text_field :content %>
-  
+ <div class="form_group">
+  <%= f.label :content, 'タスク' %>
+  <%= f.text_field :content, class: "form-control" %>
+ </div>
+ 
+ <div class="form_group">
   <%= f.label :status, "状況"%>
+  <%= f.text_field :status, class: "form-control" %>
+ </div>
   
-  <%= f.text_field :status %>
-  
-  <%= f.submit '投稿' %>
+  <%= f.submit '投稿', class: "btn btn-primary" %>
  
 <% end %>
+</div>
+</div>
+</div>
+</div>
+</div>
