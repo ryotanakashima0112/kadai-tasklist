@@ -1,10 +1,13 @@
 class TasksController < ApplicationController
+  before_action :require_user_logged_in, only: [:show]
+  
   def index
     @tasks = Task.all.page(params[:page])
   end
   
   def show
     @task = Task.find(params[:id])
+    @task.user = current_user
   end
   
   def new
@@ -13,6 +16,7 @@ class TasksController < ApplicationController
   
   def create
     @task = Task.new(task_params)
+    @task.user = current_user
     
     if @task.save
       flash[:success] = "Taskが正常に保存されました"
@@ -29,6 +33,7 @@ class TasksController < ApplicationController
   
   def update
     @task = Task.find(params[:id])
+    @task.user = current_user
     
     if @task.update(task_params)
       flash[:success] = "変更に成功しました"
@@ -45,12 +50,19 @@ class TasksController < ApplicationController
     
     flash[:success] = "削除に成功しました"
     
-    redirect_to root_url
+    redirect_to '/tasks'
   end
   
   private
   
   def task_params
     params.require(:task).permit(:content, :status)
+  end
+  
+  def correct_user
+    @task = current_user.microposts.find_by(id: params[:id])
+    unless @task
+      redirect_to '/tasks'
+    end
   end
 end
