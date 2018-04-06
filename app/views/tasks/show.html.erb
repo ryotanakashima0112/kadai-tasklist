@@ -13,10 +13,6 @@
     <th>ステータス</th>
     <td><%= @task.status %></td>
   </tr>
-  <tr>
-    <th>タスク管理者</th>
-    <td><%= @task.user.name %></td>
-  </tr>
 </table>
 
 <% if current_user == @task.user %>
