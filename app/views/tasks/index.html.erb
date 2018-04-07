@@ -11,11 +11,13 @@
     </thead>
     <tbody>
       <% @tasks.each do |task| %>
+       <% if current_user == task.user %>
         <tr>
           <td><%= link_to task.id, task %></td>
           <td><%= task.content %></td>
           <td><%= task.status %></td>
         </tr>
+       <% end %>
       <% end %>
     </tbody>
   </table>
