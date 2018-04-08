@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in, only: [:show, :index]
-  
+  before_action :correct_user, only: [:show]
+
   def index
     @tasks = Task.all.page(params[:page])
   end
@@ -59,7 +60,7 @@ class TasksController < ApplicationController
   end
   
   def correct_user
-    @task = current_user.microposts.find_by(id: params[:id])
+    @task = current_user.tasks.find_by(id: params[:id])
     unless @task
       redirect_to '/tasks'
     end

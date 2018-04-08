@@ -1,3 +1,4 @@
+<% if current_user == @task.user %>
 <h1>id: <%= @task.id %>のタスク詳細ページ</h1>
 
 <table class="table table-bordered">
@@ -18,3 +19,4 @@
 <%= link_to '編集ページへ移動する', edit_task_path(@task), class: "btn btn-default" %>
 <%= link_to 'このタスクを削除する', @task, method: :delete, data: { confirm: '本当に削除してよろしいですか？'}, class: "btn btn-danger"%>
 <%= link_to '投稿一覧ページへ戻る', tasks_path, class: "btn btn-primary" %>
+<% end %>
